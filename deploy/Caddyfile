@@ -1,0 +1,13 @@
+# Ariane — HTTPS automatique en trois gestes.
+#
+#  1. remplacez le domaine ci-dessous par le vôtre ;
+#  2. pointez le DNS (enregistrement A) vers l'IP de votre machine ;
+#  3. lancez :  caddy run   (ou le service système de Caddy)
+#
+# Caddy obtient et renouvelle le certificat Let's Encrypt tout seul.
+# Le serveur Ariane tourne derrière, sur 127.0.0.1:8003
+# (node outils/serveur-ariane.js, avec ORIGINE=https://votre-domaine).
+
+ariane-med.ma {
+	reverse_proxy 127.0.0.1:8003
+}

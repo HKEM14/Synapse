@@ -1,0 +1,22 @@
+# /etc/systemd/system/ariane.service
+# systemd garde le serveur vivant, le relance au démarrage et journalise.
+# Adapter User= et WorkingDirectory= à votre machine.
+[Unit]
+Description=Ariane — memoire & methode (appli + paiements)
+After=network.target
+
+[Service]
+Type=simple
+User=ariane
+WorkingDirectory=/home/ariane/app-ariane
+Environment=NODE_ENV=production
+Environment=PORT=8003
+Environment=ORIGINE=https://votre-domaine.ma
+# Créer ce fichier hors du dépôt, avec des secrets réels et droits 0640 (root:ariane).
+EnvironmentFile=/etc/ariane/ariane.env
+ExecStart=/usr/bin/node outils/serveur-ariane.js
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
